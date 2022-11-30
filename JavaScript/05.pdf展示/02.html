@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.min.js"></script>
+  <script type="text/javascript">
+    import pdf from "./test.pdf";
+    var currPage = 1;
+    var numPages = 0;
+    var thePDF = null;
+    // pdfjsLib.getDocument(<?php echo "'/bw_site/documents/newslettermailtemp/".$filename."'"; ?>).then(function(pdf) {
+    //         thePDF = pdf;
+    //         numPages = pdf.numPages;
+    //         pdf.getPage( 1 ).then( handlePages );
+    // });
+    getPdf(pdf);
+    function getPdf(pdf) {
+      thePDF = pdf;
+      console.log(thePDF);
+      numPages = pdf.numPages;
+      console.log(numPages);
+      pdf.getPage(1).then(handlePages);
+    }
+    function handlePages(page) {
+      var viewport = page.getViewport(2);
+
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      page.render({ canvasContext: context, viewport: viewport });
+
+      document.body.appendChild(canvas);
+
+      currPage++;
+      if (thePDF !== null && currPage <= numPages) {
+        thePDF.getPage(currPage).then(handlePages);
+      } else {
+        canvasfunc();
+      }
+    }
+    var image = [];
+    function canvasfunc() {
+      for (var i = 0; i < document.getElementsByTagName("canvas").length; i++) {
+        var canvases = document.getElementsByTagName("canvas")[i];
+        image[i] = new Image();
+        image[i].src = canvases.toDataURL("image/png");
+        document.body.appendChild(image[i]);
+      }
+    }
+  </script>
+</html>

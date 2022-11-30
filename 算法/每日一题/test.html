@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="getData()">获取数据</button>
+</body>
+<script>
+  function getData() {
+    const xml = new XMLHttpRequest();
+    const url = "http://172.18.4.30:32173/pfsweb/rest/pfs/str/find/dict/data"
+    // xml.setRequestHeader("Cookie", "mycookie=cookie")
+    xml.open("get", url, true)
+    xml.withCredentials = true
+    xml.send()
+    xml.onreadystatechange = function () {
+      if (xml.readyState == 4 && xml.status == 200) {
+        alert(xml.responseText);
+      }
+    };
+  }
+  // if (xml.status === "200")
+</script>
+
+</html>

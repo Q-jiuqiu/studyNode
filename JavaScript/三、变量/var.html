@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<!-- <script>
+  let name = "Test";
+  let age = 36;
+</script>
+<script>
+  console.log(name);
+  if (typeof name === "undefined") {
+    let name;
+    console.log(1);
+  }
+  name = "HHH"
+  console.log(name);
+  try {
+    console.log(age)
+  } catch {
+    let age
+    console.log(2);
+  }
+  age = 26
+  console.log(age);
+</script> -->
+
+<script>
+  // let a = [0, 1, 2, 3, 4]
+  // for (var i = 0; i < 5; i++) {
+  //   console.log(i, a[i]);
+  // }
+  // console.log(i);
+
+  // for (var i = 0; i < 5; i++) {
+  //   setTimeout(() => console.log(i), 0)
+  // }
+  // 输出: 5 5 5 5 5  ==> 原因是setTimeout属于宏任务,当执行栈执行完后i以及被赋值为5了(同一个迭代变量被反复赋值),所以输出的都是5
+  // for (let i = 0; i < 5; i++) {
+  //   setTimeout(() => console.log(i), 0)
+  // }
+  // 输出: 0 1 2 3 4  ==> 原因是setTimeout属于宏任务,当执行栈执行完后i以及被赋值为5了,所以输出的都是5
+
+
+
+  // var test = "test";
+  // function Fun1() {
+  //   test = "xxxx"
+  //   console.log(test);
+  // }
+  // function Fun2() { // 函数作用域 -- 函数作用域可以访问全局作用域,全局作用域无法访问函数作用域
+  //   var test = "qqqq"
+  //   console.log(test);
+  // }
+  // console.log(test);
+  // Fun1()
+  // console.log(test);
+  // Fun2()
+  // console.log(test);
+
+  // 变量提升
+  // var a = 10;
+  // var a;
+  // console.log(a); // 10
+
+  // 函数提升优先于变量提升
+  // console.log(a) // ƒ a() {}
+  // function a() { }
+  // console.log(a)
+  // var a = 1
+  // console.log(a)
+</script>
+
+</html>

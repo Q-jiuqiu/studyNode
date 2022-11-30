@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打印</title>
+  <style>
+    .div{
+      height: 1000px;
+      width: 100%;
+      background-color: darkorange;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="Print()">打印当前页--全页面打印---所见非所得</button>
+  <div class="div">test</div>
+  <script>
+    function Print(){
+      // window.print();
+      document.execCommand('print');
+    }
+  </script>
+</body>
+</html>

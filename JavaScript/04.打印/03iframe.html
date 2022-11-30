@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #iframe{
+      width: 100%;
+    }
+    #printId{
+      width: 100px;
+      height: 100px;
+      background-color: palegoldenrod;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="onIframePrint()">打印</button>
+  <div id="printId">111</div>
+  <iframe id="iframe" src="./01window上的方法打印.html" frameborder="0"></iframe>
+  <script>
+    function onIframePrint(printId) {
+      const printContentHtml = document.getElementById("printId").innerHTML;
+      console.log(printContentHtml);
+      const iframe = document.createElement("iframe");
+      iframe.setAttribute(
+        "style",
+        "position:absolute;width:0px;height:0px;left:-500px;top:-500px;"
+      );
+      document.body.appendChild(iframe);
+      iframe.contentDocument.write(printContentHtml);
+      iframe.contentDocument.close();
+      iframe.contentWindow.print();
+      document.body.removeChild(iframe);
+    }
+  </script>
+</body>
+</html>

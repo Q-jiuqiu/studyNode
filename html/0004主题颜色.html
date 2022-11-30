@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>主题颜色</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+
+      body[data-theme="light"] {
+        background-color: aquamarine;
+      }
+
+      body[data-theme="light"] .box {
+        background-color: tomato;
+      }
+
+      body[data-theme="dark"] {
+        background-color: tomato;
+      }
+
+      body[data-theme="dark"] .box {
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <div class="box"></div>
+    <button onclick="handleThemeChange()">改变主题</button>
+  </body>
+
+  <script>
+    function handleThemeChange() {
+      let body = document.querySelector("body");
+      let theme = body.getAttribute("data-theme");
+      if (theme === "light") {
+        console.log(1);
+        body.setAttribute("data-theme", "dark");
+      } else {
+        console.log(2);
+        body.setAttribute("data-theme", "light");
+      }
+    }
+  </script>
+</html>

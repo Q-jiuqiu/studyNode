@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+  async function saveFile(blob, filename) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [
+          {
+            description: "PNG file",
+            accept: {
+              "image/png": [".png"],
+            },
+          },
+          {
+            description: "Jpeg file",
+            accept: {
+              "image/jpeg": [".jpeg"],
+            },
+          },
+        ],
+      });
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+      return handle;
+    } catch (err) {
+      console.error(err.name, err.message);
+    }
+  }
+
+  function download() {
+    const imgBlob = dataUrlToBlob(imgDataUrl, "image/png");
+    saveFile(imgBlob, "face.png");
+  }
+</script>
+
+</html>

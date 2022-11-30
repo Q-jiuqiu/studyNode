@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>typeof</title>
+  </head>
+  <body>
+    <script>
+      console.log(typeof 1); // number
+      console.log(typeof "1"); // string
+      console.log(typeof true); // boolean
+      console.log(
+        typeof {
+          name: "你好",
+        }
+      ); // object
+      var hh;
+      console.log(typeof undefined); // undefined
+      console.log(typeof hh);
+      console.log(typeof aa); // undefined
+      // console.log(aa); 报错 ReferenceError
+      console.log(typeof [1, 2, 5]); // object
+      console.log(typeof null); // null
+      console.log(typeof Symbol("1")); // symbol
+      function test() {}
+      console.log(typeof test); // function
+    </script>
+  </body>
+</html>

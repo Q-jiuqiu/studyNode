@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .imgSwiper {
+      position: relative;
+      width: 500px;
+      height: 400px;
+      overflow: hidden;
+      border: 2px solid red;
+    }
+
+    .dots {
+      width: 500px;
+      height: 100px;
+      display: flex;
+
+    }
+
+    .dots-item {
+      width: 50px;
+      height: 50px;
+      margin-right: 25px;
+      border-radius: 50%;
+      background-color: #eee;
+      transition: all 1s;
+    }
+
+    .dots-item-acitve {
+      background-color: #aaa;
+
+    }
+
+    .img-box {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      top: -10px;
+      right: 0;
+    }
+
+    img {
+      width: 500px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="move()">移动</button>
+  <div class="imgSwiper">
+    <div class="img-box">
+      <img src="../img/01.jpg" alt="">
+      <img src="../img/02.jpg" alt="">
+      <img src="../img/03.jpg" alt="">
+      <img src="../img/01.jpg" alt="">
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dots-item"></div>
+    <div class="dots-item"></div>
+    <div class="dots-item"></div>
+  </div>
+</body>
+<script>
+  let imgSwiper = document.getElementsByClassName("imgSwiper")[0];
+  let imgBox = document.getElementsByClassName("img-box")[0];
+  let dotsItems = document.getElementsByClassName("dots-item");
+  let height = 400;
+  let cur = 0;
+  setInterval(() => {
+    const top_ = imgBox.style.top;
+    const arr = top_.split("p")
+    if (arr[0] * -1 <= height * 3) {
+      cur = Math.floor((arr[0] * -1) / height);
+      imgBox.style.top = `${arr[0] * 1 - 1}px`
+    }
+    else {
+      cur = 0
+      imgBox.style.top = 0
+    }
+    for (let i = 0; i < dotsItems.length; i++) {
+      const className = dotsItems[i].className;
+      if (cur == i) {
+        dotsItems[i].className = `${className} dots-item-acitve`;
+      } else {
+        if (className.indexOf("dots-item-acitve")) {
+          dotsItems[i].className = "dots-item"
+        }
+      }
+    }
+  }, 10)
+</script>
+
+</html>

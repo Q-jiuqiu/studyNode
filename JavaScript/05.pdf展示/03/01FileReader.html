@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #imgDiv {
+        width: 100%;
+        height: 100vh;
+        background-color: beige;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="input" onchange="getFiles()" type="file" />
+    <div id="imgDiv"></div>
+  </body>
+  <script type="text/javascript" src="./js/pdf.js"></script>
+  <script>
+    function getFiles() {
+      const input = document.getElementById("input");
+      const files = input.files;
+      if (window.FileReader) {
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(files[0]);
+        reader.onload = function (e) {
+          const myData = new Uint8Array(e.target.result);
+          const typedArray = new Uint8Array(this.result);
+          PDFJS.cMapUrl =
+            "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.288/cmaps/";
+          PDFJS.cMapPacked = true;
+          PDFJS.getDocument(typedArray).then((dpf) => {});
+        };
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <!-- 分时函数 -->
+  <script>
+    let arr = [];
+    for (let index = 0; index < 1000000; index++) {
+      arr.push(index);
+    }
+
+    let timeChunk = function (arr, fn, count) {
+      let obj, t;
+      let len = arr.length;
+      let start = function () {
+        for (let i = 0; i < Math.min(count || 1, arr.length); i++) {
+          let obj = arr.shift();
+          fn(obj);
+        }
+      };
+      return function () {
+        t = setInterval(function () {
+          if (arr.length === 0) {
+            return clearInterval(t);
+          }
+          start();
+        }, 200);
+      };
+    };
+    let renderFriendList = timeChunk(
+      arr,
+      function (n) {
+        let div = document.createElement("div");
+        div.innerHTML = n;
+        document.body.appendChild(div);
+      },
+      8
+    );
+    renderFriendList();
+    alert("OK");
+  </script>
+  <!-- 普通函数 -->
+  <!-- <script>
+    let arr = [];
+    for (let index = 0; index < 1000000; index++) {
+      arr.push(index);
+      let div = document.createElement("div");
+      div.innerHTML = index;
+      document.body.appendChild(div);
+    }
+    alert("OK");
+  </script> -->
+</html>

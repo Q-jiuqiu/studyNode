@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打印</title>
+  <style>
+    .div{
+      height: 1000px;
+      width: 100%;
+      background-color: darkorange;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="innerHtmlPrint()">局部打印--体验不好</button>
+  <div class="div" id="print">111</div>
+  <script>
+    function innerHtmlPrint() {
+      // 缓存页面内容
+      const bodyHtml = window.document.body.innerHTML;
+      // 获取要打印的dom
+      const printContentHtml = document.getElementById("print").innerHTML;
+      // 替换页面内容
+      window.document.body.innerHTML = printContentHtml;
+      // 全局打印
+      window.print();
+      // 还原页面内容
+      window.document.body.innerHTML = bodyHtml;
+      // 页面事件会丢失，需要刷新
+      window.location.reload();
+    }
+
+  </script>
+</body>
+</html>

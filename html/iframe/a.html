@@ -1,0 +1,62 @@
+<!--
+ * @Author: quling
+ * @Date: 2022-05-20 11:29:53
+ * @LastEditors: quling
+ * @LastEditTime: 2022-06-27 15:43:51
+ * @FilePath: \JavaScript\html\iframe\a.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div {
+        width: 500px;
+        height: 500px;
+        background-color: lightcoral;
+      }
+      #iframe {
+        width: 200px;
+        height: 200px;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div">
+      <iframe src="./b.html" id="iframe"></iframe>
+    </div>
+  </body>
+  <script>
+    // console.log(document.getElementById("iframe").contentWindow)
+    // postMessage
+    // document
+    //   .getElementById("iframe")
+    //   .contentWindow.postMessage("你好", "./b.html");
+    const iframe = document.getElementById("iframe");
+    const div = document.getElementById("div");
+    console.log(1, iframe.contentDocument);
+    console.log(1, iframe.contentDocument.addEventListener);
+    div.onclick = () => {
+      console.log("11");
+    };
+    iframe.contentDocument.addEventListener("click", () => {
+      console.log("点击iframe");
+    });
+    const addEventListener = iframe.contentDocument.addEventListener;
+    iframe.onload = function (e) {
+      console.log("iframe加载完毕", arguments);
+      console.log(1, e, e.contentDocument);
+      // iframe.contentDocument.addEventListener("click", () => {
+      //   console.log("点击iframe");
+      // });
+      // addEventListener("click", () => {
+      //   console.log("点击iframe");
+      // });
+    };
+  </script>
+</html>

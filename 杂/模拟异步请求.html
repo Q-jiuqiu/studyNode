@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 21:53:37
+ * @LastEditTime: 2021-11-17 10:29:26
+ * @LastEditors: quling
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript\算法\test.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function fun(data, time) {
+      return new Promise((resolve) => {
+        console.log(data);
+        setTimeout(() => {
+          console.log(data, "--1");
+          resolve()
+        }, time)
+      })
+    }
+
+    async function Fun1() {
+      await fun("Fun1", 1000)
+    }
+
+    async function Fun2() {
+      await fun("Fun2", 1)
+    }
+
+
+    // async function test() {
+    //   // console.log(1);
+    //   await Fun1()
+    //   await Fun2()
+    // }
+
+    function test() {
+      // console.log(1);
+      let res1 = Fun1()
+      console.log(res1);// promise
+      let res2 = Fun2()
+      console.log(res2);// promise
+    }
+
+    test()
+  </script>
+</body>
+
+</html>

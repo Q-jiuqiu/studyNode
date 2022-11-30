@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  重定义console.log
+  console.log=function (){}
+</body>
+
+<script>
+  // console.log = function () {
+  //   window.alert("console.log")
+  // }
+
+  console.error = function () {
+    window.alert("console.error")
+  }
+
+  function fun() {
+    // window.alert("fun1")
+    console.log(console)
+    // console.error("test")
+    // window.alert("fun2")
+  }
+  fun()
+</script>
+
+</html>

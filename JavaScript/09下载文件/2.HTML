@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input id="file" type="file" onchange="test()" />
+  <a href="https://www.w3school.com.cn/i/w3school_logo_white.gif" download="w3logo">
+    <img border="0" src="https://www.w3school.com.cn/i/w3school_logo_white.gif" alt="W3School">
+  </a>
+  <button onclick="download()">下载</button>
+</body>
+
+<script>
+  let file = null
+  function test(e) {
+    file = document.getElementById("file").files[0]
+  }
+  async function saveFile(blob, filename) {
+    console.log(blob, filename);
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [
+          {
+            description: "PNG file",
+            accept: {
+              "image/png": [".png"],
+            },
+          },
+          {
+            description: "Jpeg file",
+            accept: {
+              "image/jpeg": [".jpeg"],
+            },
+          },
+        ],
+      });
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+      return handle;
+    } catch (err) {
+      console.error(err.name, err.message);
+    }
+  }
+
+  function download() {
+    const blob = new Blob([file], { type: "application/msword" });
+    saveFile(blob, file.name);
+  }
+
+</script>
+
+</html>

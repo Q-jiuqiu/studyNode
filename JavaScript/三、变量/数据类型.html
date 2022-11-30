@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+  <h5>undefined</h5>
+  <script>
+    // "use strict"
+    var a;
+    let c;
+    // const d = 1; const 在初始化时就必须赋值
+    console.log(a); // undefined
+    console.log(delete a); // false
+    // 严格模式下: Uncaught SyntaxError: Delete of an unqualified identifier in strict mode. 
+    // 严格模式下不可以删除变量; 非严格模式下删除对象返回false;
+    // delete 用于删除属性
+
+    console.log(typeof a); // undefined
+    console.log(typeof b); // undefined
+    console.log(typeof c); // undefined
+    console.log(a == undefined);
+    // console.log(b == undefined); Uncaught ReferenceError: b is not defined
+    console.log(undefined == undefined) // true
+  </script> -->
+
+  <!-- <h5>null</h5>
+  <script>
+    let a = null;
+    console.log(typeof (a)); // object
+    console.log(undefined == null) // true
+    console.log(undefined === null) // false
+  </script> -->
+
+  <!-- <h5>Boolean</h5>
+  <script>
+    function Fun(num) {
+      if (num) {
+        console.log(1);
+      } else {
+        console.log(2);
+      }
+    }
+    Fun(0)
+    Fun(1)
+    Fun(2)
+  </script> -->
+
+  <h5>Number</h5>
+  <script>
+    // // "use strict"
+
+    // // Uncaught SyntaxError: Octal literals are not allowed in strict mode. 严格模式下下不允许使用带前导零的数
+    // let num1 = 012; // 以0开头,并且后面的数小于8,故为8进制数,
+    // // let num2 = 012359; // 十进制数
+    // console.log(num1);
+
+    // let num_16_1 = 0x10;
+    // let num_16_2 = 0xa0;
+    // let num_16_3 = 0xA0;
+    // console.log(num_16_1, num_16_2, num_16_3);
+
+    // let sum = num1 + num_16_1; // 运算时 以十进制进行运算
+    // console.log(sum);
+
+    // let num = 0o10; // 八进制表示方式  严格模式下可用
+    // console.log(num);
+
+
+    // // 值得范围
+    // console.log("最大值:", Number.MAX_VALUE, "最小值:", Number.MIN_VALUE);
+    // // isFinite()  判断是否是有限大的数 介于最大值到最小值之间  (Number.MIN_VALUE, Number.MAX_VALUE)
+    // console.log(isFinite(Number.MAX_VALUE), isFinite(num_16_1), isFinite(Infinity), isFinite(-Infinity));
+
+
+    // // 特殊数值NaN 不是数值
+    // console.log(NaN == NaN); // false
+    // // isNaN()  判断一个值是否不是数值, 不是数值返回true , 是数值(当前值可以转换成数值)返回false
+    // console.log(isNaN(NaN)); // true
+    // console.log(isNaN(10)); // false 是数值
+    // console.log(isNaN("10")); // false 不是数值,但是能转换成数值10
+    // console.log(isNaN("10.1")); // false 不是数值,但是能转换成数值10.1
+    // console.log(isNaN("10.1a")); // true
+    // console.log(isNaN(true));  // false 不是数值,但是能转换成数值1
+    // console.log(isNaN("test")); // true
+    // console.log(typeof NaN); // number
+
+    // 转换成数值
+    // 1.Number() 可以转换任意类型
+    // console.log(Number(true)); // 1
+    // console.log(Number(1));  // 1
+    // console.log(Number("10.234"));  // 10.234
+    // console.log(Number("0.271avc")); // NaN
+    // console.log(Number("-0.271")); // -0.271
+    // console.log(Number("+0.271")); // 0.271
+    // console.log(Number("true10")); // NaN
+    // console.log(Number(NaN)); // NaN
+    // let obj = {
+    //   name: "LiHua",
+    //   age: "18"
+    // }
+    // console.log(Number(obj)); // NaN
+    // console.log(Number(null)); // 0
+    // console.log(Number(undefined));  // NaN
+    // console.log(Number(011));  // 9
+    // console.log(Number(0o11));  //9
+    // console.log(Number("011"));  // 11
+    // console.log(Number(""));  // 0
+    // console.log(Number(" 1"));  // 1
+    // console.log(obj.valueOf()); // {name: "LiHua", age: "18"}
+    // console.log(obj.toString()); // [object Object]
+
+    // 2.parseInt(string, radix) 解析一个字符串并返回指定基数的十进制整数  从头开始检测,如果是以空格\+\- 开头则往下继续扫描直到扫描到非数字的就返回数值,若不是则直接返回NaN.
+    // radix 将radix进制的数转换为十进制数 范围为[2,32]
+    // console.log(parseInt(true)); // NaN
+    // console.log(parseInt(1));  // 1
+    // console.log(parseInt("10.234"));  // 10
+    // console.log(parseInt("1 0.234"));  // 1 一"1"开头是数字,扫描到空格为非数字返回数值1
+    // console.log(parseInt("0.271avc")); // 0 "."为非数字
+    // console.log(parseInt("-0.271")); // -0
+    // console.log(parseInt("+0.271")); // 0
+    // console.log(parseInt("true10")); // NaN
+    // console.log(parseInt(NaN)); // NaN
+    // let obj = {
+    //   name: "LiHua",
+    //   age: "18"
+    // }
+    // console.log(parseInt(obj)); // NaN
+    // console.log(parseInt(null)); // NaN
+    // console.log(parseInt(undefined));  // NaN
+    // console.log(parseInt(011));  // 9
+    // console.log(parseInt(0o11));  //9
+    // console.log(parseInt("011"));  // 11
+    // console.log(parseInt(""));  // NaN
+    // console.log(parseInt(" 1"));  // NaN
+    // 进制
+    // console.log(parseInt("4", 0)); // 4
+    // console.log(parseInt("4", 1)); // NaN
+    // console.log(parseInt("4", 2)); // NaN
+    // console.log(parseInt("4", 3)); // NaN
+    // console.log(parseInt("4", 4)); // NaN
+    // console.log(parseInt("4", 5)); // 4
+    // console.log(parseInt("10", 2)); // 2
+    // console.log(parseInt("10", 8)); // 8
+    // console.log(parseInt("10", 16)); // 16
+    // console.log(parseInt("10", 10)); // 10
+    // console.log(parseInt("AF", 10)); // NaN
+    // console.log(parseInt("AF", 16)); // 175
+    // console.log(parseInt("0xAF", 16)); // 175
+    // console.log(parseInt("0xAF")); // 175
+    // console.log(parseInt("AF")); // NaN
+    let result = ["1", "2", "3"].map(parseInt)
+    console.log(result); // 1,NaN,NaN
+
+    console.log(parseFloat('12.900'));
+    console.log(parseFloat('12.0'));
+  </script>
+</body>
+
+</html>

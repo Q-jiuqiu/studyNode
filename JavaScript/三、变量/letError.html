@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let age = 12;
+    let name = "Mike";
+    var sex = "male"
+  </script>
+
+  <script>
+    console.log(age)
+    // 假设脚本不确定页面中是否已经声明了同名变量  
+    // 那它可以假设还没有声明过   
+    if (typeof name === 'undefined') {
+      let name = "LiHua";
+    }
+    console.log(name)
+    name = "Anme";
+    try {
+      console.log(name);
+    } catch (error) {
+      let name = "Lisa"
+    }
+    console.log(name);
+    function reSex() {
+      var sex = "female"
+    }
+    reSex();
+    console.log(sex)
+  </script>
+
+  <script>
+    var a = 1
+    let b = 1
+    const c = 1
+    console.log(window.b) // undefined
+    console.log(window.c) // undefined
+
+    function test() {
+      console.log(a)
+      let a
+    }
+    test()
+  </script>
+
+</body>
+
+</html>

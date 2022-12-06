@@ -1,0 +1,84 @@
+<!--
+ * @Author: quling
+ * @Date: 2022-12-06 10:18:53
+ * @LastEditors: quling
+ * @LastEditTime: 2022-12-06 10:33:07
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .app {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-flow: column;
+    }
+
+    .header {
+      height: 20%;
+      background-color: beige;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+    }
+
+    .left {
+      width: 20%;
+      background-color: lightblue;
+    }
+
+    .center {
+      flex: 1;
+      background-color: lightcoral;
+      /* 滤镜filter--grayscale取值0-1 */
+      filter: grayscale(1);
+      /* 旋转，缩放，倾斜或平移 */
+      transform: scale(1);
+
+    }
+
+    .fixed {
+      width: 100%;
+      height: 20px;
+      background-color: lightgreen;
+      position: fixed; 
+      /* fixed默认相对于屏幕视口进行定位 */
+      /* 注意: 当元素祖先的 transform, perspective 或 filter 属性非 none 时，容器由视口改为该祖先 */
+      bottom: 0px;
+    }
+
+    .right {
+      width: 20%;
+      background-color: lightsalmon;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="header"></div>
+    <div class="container">
+      <div class="left"></div>
+      <div class="center">
+        <div class="fixed"></div>
+      </div>
+      <div class="right"></div>
+    </div>
+  </div>
+</body>
+
+</html>

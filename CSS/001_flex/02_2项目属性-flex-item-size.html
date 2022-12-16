@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2022-11-30 15:35:08
  * @LastEditors: quling
- * @LastEditTime: 2022-12-13 17:22:16
+ * @LastEditTime: 2022-12-16 11:22:59
  * @Description: 项目
 -->
 <!DOCTYPE html>
@@ -23,7 +23,7 @@
       flex-wrap: wrap;
     }
 
-    /* flex-basis: 定义项目在主轴方向所占的大小,flex-basis优先级高于width[height] */
+    /* 知识点1: flex-basis: 定义项目在主轴方向所占的大小,flex-basis优先级高于width[height] */
     .item {
       flex-basis: 20px;
       /* 不生效,元素宽度为20px而不是100px */
@@ -32,12 +32,23 @@
       border: 1px solid #e00;
       box-sizing: border-box;
     }
+
+    /* 知识点2: 元素有默认宽高(如input框),如果flex-basis小于默认宽度,元素宽度不变;如果flex-basis大于flex-basis,元素宽度为flex-basis*/
+    .input {
+      /* 默认宽度为170.5 */
+      height: 50px;
+      /* 1.设置 flex-basis: 10px; 后元素input宽度为170.5 */
+      /* 2.设置 flex-basis: 700px;flex-shrink: 1; 后元input宽度为304 */
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
     <div class="item index-1">1</div>
+  </div>
+  <div class="container">
+    <input type="text" class="input">
   </div>
 </body>
 

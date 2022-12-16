@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2022-11-30 15:35:08
  * @LastEditors: quling
- * @LastEditTime: 2022-12-16 11:22:59
+ * @LastEditTime: 2022-12-16 11:40:15
  * @Description: 项目
 -->
 <!DOCTYPE html>
@@ -40,15 +40,45 @@
       /* 1.设置 flex-basis: 10px; 后元素input宽度为170.5 */
       /* 2.设置 flex-basis: 700px;flex-shrink: 1; 后元input宽度为304 */
     }
+
+    /* 知识点3.如果元素设置了min-width[height],如果flex-basis<=min-width[height],元素宽度=min-width[height];如果flex-basis>min-width[height],元素宽度=flex-basis */
+    .example3-item {
+      min-width: 100px;
+      background: #666;
+      flex-basis: 10px;
+      /* flex-basis: 200px; */
+    }
+
+    /* 如果min-width[height]>容器的宽度,那么设置了flex-shrink也不生效,此时项目就会超出容器 */
+    /* 运算的宽度为700px */
+    /* .example3-item {
+      min-width: 700px;
+      background: #666;
+      flex-shrink: 1;
+    } */
+
+    /* 如果max-width[height]>容器的宽度,那么设置了flex-grow/flex-shrink也不生效,此时项目就会超出容器, max-width[height]就是一个上限 */
+    /* 运算的宽度为700px */
+    /* .example3-item {
+      min-width: 700px;
+      background: #666;
+      flex-shrink: 1;
+    } */
   </style>
 </head>
 
 <body>
+  <!-- 知识点1示例 -->
   <div class="container">
     <div class="item index-1">1</div>
   </div>
+  <!-- 知识点2示例 -->
   <div class="container">
     <input type="text" class="input">
+  </div>
+  <!-- 知识点3示例 -->
+  <div class="container">
+    <div class="example3-item"></div>
   </div>
 </body>
 

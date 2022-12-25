@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2022-11-30 15:35:08
  * @LastEditors: quling
- * @LastEditTime: 2022-12-16 11:40:15
+ * @LastEditTime: 2022-12-25 22:03:17
  * @Description: 项目
 -->
 <!DOCTYPE html>
@@ -64,6 +64,35 @@
       background: #666;
       flex-shrink: 1;
     } */
+
+    .example4-item {
+      width: auto;
+      background: #666;
+      flex-basis: 20px;
+      white-space: nowrap;
+    }
+
+    .example4-item-1 {
+      width: auto;
+      background: #2e2;
+      white-space: nowrap;
+      flex-basis: 60px;
+    }
+
+    .box {
+      display: flex;
+      width: 700px;
+      height: 700px;
+      border: 1px #333 solid;
+    }
+
+    .box .box-item {
+      width: 80px;
+      height: 80px;
+      text-align: center;
+      line-height: 80px;
+      background: red;
+    }
   </style>
 </head>
 
@@ -79,6 +108,36 @@
   <!-- 知识点3示例 -->
   <div class="container">
     <div class="example3-item"></div>
+  </div>
+  <!-- 知识点4示例 -->
+  <div class="container">
+    <!-- 当width:auto时 item的内容大于flex-basis 那么item的content=auto   -->
+    <div class="example4-item">你好你吼吼吼吼圣诞节发哦否定</div>
+    <div class="example4-item-1">你好</div>
+    <div class="example4-item-1">你好</div>
+  </div>
+  <div class="box">
+    <div class="box-item" style="flex: 0 1 600px;">1</div>
+    <div class="box-item" style="flex: 0 1 20px;">2</div>
+    <div class="box-item" style="flex: 0 1 100px;">3</div>
+  </div>
+  <div class="box">
+    <div class="box-item" style="width: 600px;flex-shrink: 1;">1</div>
+    <div class="box-item" style="width: 400px;flex-shrink: 3;">2</div>
+    <div class="box-item" style="width: 200px;flex-shrink: 5;">3</div>
+    <!-- flex-shrink计算 -->
+    <!-- 
+      加权和:1*600+3*400+5*200=2800
+      每个shrink比例:
+      1.1*600/2800≈0.214
+      2.3*400/2800≈0.429
+      3.5*200/2800≈0.357
+      超出部分:600+400+200-720=480
+      计算每个大小:
+      1.600-480*0.214=497.28
+      2.400-380*0.429=194.08
+      3.200-380*0.357=28.64
+     -->
   </div>
 </body>
 

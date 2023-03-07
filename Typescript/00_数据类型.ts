@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2023-03-04 15:43:31
  * @LastEditors: quling
- * @LastEditTime: 2023-03-06 22:00:19
+ * @LastEditTime: 2023-03-07 21:34:22
  * @Description: file content
  * @FilePath: \studyNode\Typescript\00_数据类型.ts
  */
@@ -83,13 +83,13 @@ function fun1() {
   let a2: Object = false;
   let a3: Object = [1, "33"];
   let a4: Object = {};
-  let a5: Object = () => {};
+  let a5: Object = () => { };
   // object
   // let b: object = "1"; // 错误的 原始类型
   // let b1: object = false; // 错误的 原始类型
   // let b2: object = 1; // 错误的 原始类型
   let b3: object = []; // 引用类型
-  let b4: object = () => {}; // 应用类型
+  let b4: object = () => { }; // 应用类型
   let b5: object = {};
   // {}
   let c: {} = 123;
@@ -121,7 +121,7 @@ function fun2() {
   }
   // 4.继承
   // interface Cxxx extends B, Axxx {
-  interface Cxxx extends B{
+  interface Cxxx extends B {
     name: string;
   }
   interface B {
@@ -162,3 +162,43 @@ function fun2() {
   // a.cb = 123; // 报错 无法为“cb”赋值，因为它是只读属性。
 }
 
+// 数组类型
+function fun3() {
+  // 用于定义普通类型的数组
+  // 1.[]
+  let arr: number[] = [1, 2, 3]; // 数字数组
+  // 2.泛型
+  let arr1: Array<string> = ["fdkjfah", "dd"]; // 字符串数组
+  // 定义对象数组
+  interface X {
+    name: string;
+  }
+  type Y = {
+    x: number;
+  };
+  let arr2: X[] = [{ name: "胡萝卜" }];
+  let arr3: Array<X> = [{ name: "胡萝卜" }];
+  // 定义多维数组
+  let arr4: number[][][] = [[[1]], [[3]], [[3]]]; // 表示三维数字数组
+  let arr5: Array<Array<Array<number>>> = [[[1]], [[3]], [[3]]]; // 三维数字数组
+  // 大杂烩数组
+  let arr6: any[] = [true, 1, "111"];
+  // 使用元组范式定义大杂烩数组 弊端是:1.书写麻烦;2.数组长度固定
+  let arr7: [boolean, number, string] = [true, 1, "111"];
+
+  function fun(...args: number[]) {
+    console.log(args);
+    console.log(arguments); // arguments是一个类数组
+    // let a: any[] = arguments; // 因为arguments是类数组,没有数组相关的方法.类型“IArguments”缺少类型“any[]”的以下属性: pop, push, concat, join 及其他 24 项
+    let a: IArguments = arguments;
+    // IArguments的原理
+    interface A {
+      callee: Function
+      length: number
+      [index: number]: any
+    }
+  }
+  fun(1, 2, 3); // [1,2,3] 结构出来为数组
+}
+
+fun3();

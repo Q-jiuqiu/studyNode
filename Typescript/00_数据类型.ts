@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2023-03-04 15:43:31
  * @LastEditors: quling
- * @LastEditTime: 2023-03-07 21:34:22
+ * @LastEditTime: 2023-03-07 22:14:52
  * @Description: file content
  * @FilePath: \studyNode\Typescript\00_数据类型.ts
  */
@@ -201,4 +201,71 @@ function fun3() {
   fun(1, 2, 3); // [1,2,3] 结构出来为数组
 }
 
-fun3();
+// 函数扩展
+function fun4() {
+  // 1.定义函数类型和返回 | 箭头函数定义类型和返回值
+  function add(a: number, b: number): number {
+    return a + b
+  }
+  console.log(add(1, 2));
+
+  const add2 = (a: number, b: number): number => {
+    return a + b
+  }
+  // 2.函数默认参数  |  函数可选参数
+  function add3(a: number = 10, b: number = 20): number { // a默认为10 b默认为20
+    return a + b
+  }
+  function add4(a: number = 10, b?: number): number { // b为可选值,可以不传 注意可选参数和默认值不能同时使用
+    // return a + b // “b”可能为“未定义”。
+    return a
+  }
+  // 3.参数为一个对象如何定义
+  interface User {
+    name: string
+    age: number
+  }
+  function add5(user: User): User {
+    return user
+  }
+  console.log(add5({
+    name: "Mike",
+    age: 10
+  }));
+  // 4.函数this类型
+  interface Obj {
+    users: number[]
+    add: (this: Obj, user: number) => void
+  }
+  // ts可以定义this的类型 在js中无法使用 必须是第一个参数定义this的类型 传参是自动忽略第一个参数this
+  let obj: Obj = {
+    users: [1, 2, 3],
+    add(user) {
+      this.users.push(user)
+    }
+  }
+  obj.add(4)
+  console.log(obj);
+
+  // 5.函数重载
+  let user: number[] = [1, 2, 3, 4]
+  function findNum(addUser: number[]): number[] // 如果穿的是个number类型的数组就做添加
+  function findNum(id: number): number[] // 如果传入了id就是单个查询
+  function findNum(): number[] // 如果没有传入东西就是差全部
+  // 实现函数
+  function findNum(ids?: number | number[]): number[] {
+    if (typeof ids === "number") {
+      return user.filter(v => v === ids)
+    } else if (Array.isArray(ids)) {
+      user.push(...ids)
+    }
+    return user
+  }
+
+  console.log(findNum());
+  console.log(findNum(3));
+  console.log(findNum([4, 5, 6]));
+
+}
+
+fun4()

@@ -247,7 +247,7 @@ function fun4() {
   obj.add(4)
   console.log(obj);
 
-  // 5.函数重载
+  // 5.函数重载 重载是方法名字相同，而参数不同，返回类型可以相同也可以不同。
   let user: number[] = [1, 2, 3, 4]
   function findNum(addUser: number[]): number[] // 如果穿的是个number类型的数组就做添加
   function findNum(id: number): number[] // 如果传入了id就是单个查询

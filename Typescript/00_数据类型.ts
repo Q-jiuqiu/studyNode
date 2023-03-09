@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2023-03-04 15:43:31
  * @LastEditors: quling
- * @LastEditTime: 2023-03-09 20:59:13
+ * @LastEditTime: 2023-03-09 21:14:38
  * @Description: file content
  * @FilePath: \studyNode\Typescript\00_数据类型.ts
  */
@@ -320,3 +320,24 @@ function fun5() {
 }
 // fun5()
 
+// 内置对象
+function fun6() {
+  // Ts是由三部分组成:ECMAscript、DOM、BOM
+  // let num: number = new Number(1); // 不能将类型“Number”分配给类型“number”。
+  // 1.ecma 当使用new关键字时,变量类型就为new的实例名 let argument: XX = new XX()
+  let num: Number = new Number(1);
+  let date: Date = new Date();
+  let reg: RegExp = new RegExp("\w");
+  let xhr: XMLHttpRequest = new XMLHttpRequest();
+  // 2.dom 操作文档节点的相关对象
+  // 变量类型为:HTML(标签名称)Element HTMLElement Element
+  let div = document.querySelector("div");
+  // 变量类型为:NodeList  NodeListOf<HTMLDivElement>
+  let divList = document.querySelectorAll("div");
+  // bom 操作浏览的相关对象
+  let local: Storage = localStorage;
+  let lo: Location = location;
+  let promise: Promise<number> = new Promise((resolve) => resolve(1)); // promise返回的是一个数值类型的值
+  promise.then(res => { });
+  let cookie: string = document.cookie
+}

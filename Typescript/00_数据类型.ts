@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2023-03-04 15:43:31
  * @LastEditors: quling
- * @LastEditTime: 2023-03-07 22:14:52
+ * @LastEditTime: 2023-03-09 20:48:49
  * @Description: file content
  * @FilePath: \studyNode\Typescript\00_数据类型.ts
  */
@@ -268,4 +268,45 @@ function fun4() {
 
 }
 
-fun4()
+// fun4()
+
+// 类型断言、联合类型、交叉类型
+function fun5() {
+  // 联合类型
+  let phone: number | string = "012-2334"
+  let fn = (type: boolean | number): boolean => {
+    return !!type // 强转成布尔类型
+  }
+  fn(1)
+
+  // 交叉类型  ->取并集
+  interface Person {
+    name: string,
+    age: number
+  }
+  interface Man {
+    sex: number
+  }
+  const xiaoMan = (man: Person & Man): void => {
+    console.log(man); // man具有Person和Man的所有属性 类似于extends
+  }
+  xiaoMan({
+    name: "Mike",
+    age: 12,
+    sex: 1
+  })
+
+  // 类型断言 并不会改变参数类型
+  let fn1 = (num: number | string): void => {
+    // console.log(num.length); // 类型“number”上不存在属性“length”。
+    // 第一种类型断言写法
+    console.log((num as string).length);
+    // 第二种类型断言写法
+    console.log((<string>num).length);
+
+  }
+  fn1("1223") // 结果 4
+  fn1(1223) // 结果 undefined
+}
+
+fun5()

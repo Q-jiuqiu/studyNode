@@ -7,73 +7,75 @@
  * @FilePath: \studyNode\Typescript\00_数据类型.ts
  */
 // 数字类型
-let num: number = 11.2;
-let num1: number = NaN;
-let numI: number = Infinity; // 无穷大
-let num2: number = 0xf00d; // 十六进制数
-let num3: number = 0xb1011; // 二进制数
-let num4: number = 0xb4071; // 八进制数
-let Num: Number = 1;
+function fun() {
+  let num: number = 11.2;
+  let num1: number = NaN;
+  let numI: number = Infinity; // 无穷大
+  let num2: number = 0xf00d; // 十六进制数
+  let num3: number = 0xb1011; // 二进制数
+  let num4: number = 0xb4071; // 八进制数
+  let Num: Number = 1;
 
-// 布尔类型
-// let bool: boolean = new Boolean(1); // 错误 注意，使用构造函数 Boolean 创造的对象不是布尔值,new Boolean() 返回的是一个Boolean对象。不能将类型“Boolean”分配给类型“boolean”。 “boolean”是基元，但“Boolean”是包装器对象。如可能首选使用“boolean”。
-let bool1: boolean = true;
-let bool2: boolean = Boolean(1);
+  // 布尔类型
+  // let bool: boolean = new Boolean(1); // 错误 注意，使用构造函数 Boolean 创造的对象不是布尔值,new Boolean() 返回的是一个Boolean对象。不能将类型“Boolean”分配给类型“boolean”。 “boolean”是基元，但“Boolean”是包装器对象。如可能首选使用“boolean”。
+  let bool1: boolean = true;
+  let bool2: boolean = Boolean(1);
 
-// 字符串类型
-let str: string = `QL${num4}`;
-// console.log(str);
+  // 字符串类型
+  let str: string = `QL${num4}`;
+  // console.log(str);
 
-// 空值类型
-function voidFn(): void {
-  console.log("返回空值");
+  // 空值类型
+  function voidFn(): void {
+    console.log("返回空值");
+  }
+  let u: void = undefined;
+
+  // Null与undefined
+  let n1: null = null;
+  let u1: undefined = undefined;
+
+  //这样写会报错 void类型不可以分给其他类型
+  // str = u; // 不能将类型“void”分配给类型“string”。
+
+  //这样是没问题的
+  // str = n1; // 严格模式下会报错; 非严格模式下不会报错
+
+  //或者这样的
+  // str = u1 // 严格模式下会报错; 非严格模式下不会报错
+
+  // 数据类型的包含类型（从大到小）
+  // 1、any、unknown——顶级类型
+  // 2、Object
+  // 3、Number、String、Boolean
+  // 4、number、string、boolean
+  // 5、1   “QL”   false
+  // 6、never
+
+  let anyAugment: any = []; //不会报错,因为any类型包含Array
+  anyAugment = 1;
+  anyAugment = Symbol(1);
+  anyAugment = false;
+
+  // any类型可以随意复制，any复制给其他类型或者其他类型赋值给any都不会报错
+  let a: any = 1;
+  let b: number = 2;
+  // 赋值不会报错
+  a = b;
+  b = a;
+  let c: unknown = 1;
+  c = b;
+  // b = c;报错 任意值可以赋值给unknown，但是unknown只能赋值给自身或者any
+  a = c;
+
+  let xiaoMan: unknown = { name: "Mike", open: () => 123 };
+  // console.log(xiaoMan.name); // 报错:“xiaoMan”的类型为“未知”。 unknown没有属性值、方法的概念
+  // xiaoMan.open(); // 报错:“xiaoMan”的类型为“未知”。
+
+  let xiaoMan2: any = { name: "Mike", open: () => 123 };
+  // console.log(xiaoMan2.name); // 不会报错
+  // console.log(xiaoMan2.open()); // 不会报错
 }
-let u: void = undefined;
-
-// Null与undefined
-let n1: null = null;
-let u1: undefined = undefined;
-
-//这样写会报错 void类型不可以分给其他类型
-// str = u; // 不能将类型“void”分配给类型“string”。
-
-//这样是没问题的
-// str = n1; // 严格模式下会报错; 非严格模式下不会报错
-
-//或者这样的
-// str = u1 // 严格模式下会报错; 非严格模式下不会报错
-
-// 数据类型的包含类型（从大到小）
-// 1、any、unknown——顶级类型
-// 2、Object
-// 3、Number、String、Boolean
-// 4、number、string、boolean
-// 5、1   “QL”   false
-// 6、never
-
-let anyAugment: any = []; //不会报错,因为any类型包含Array
-anyAugment = 1;
-anyAugment = Symbol(1);
-anyAugment = false;
-
-// any类型可以随意复制，any复制给其他类型或者其他类型赋值给any都不会报错
-let a: any = 1;
-let b: number = 2;
-// 赋值不会报错
-a = b;
-b = a;
-let c: unknown = 1;
-c = b;
-// b = c;报错 任意值可以赋值给unknown，但是unknown只能赋值给自身或者any
-a = c;
-
-let xiaoMan: unknown = { name: "Mike", open: () => 123 };
-// console.log(xiaoMan.name); // 报错:“xiaoMan”的类型为“未知”。 unknown没有属性值、方法的概念
-// xiaoMan.open(); // 报错:“xiaoMan”的类型为“未知”。
-
-let xiaoMan2: any = { name: "Mike", open: () => 123 };
-// console.log(xiaoMan2.name); // 不会报错
-// console.log(xiaoMan2.open()); // 不会报错
 
 // Object、object、{} 的理解
 function fun1() {

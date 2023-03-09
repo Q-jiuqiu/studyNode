@@ -2,7 +2,7 @@
  * @Author: quling
  * @Date: 2023-03-04 15:43:31
  * @LastEditors: quling
- * @LastEditTime: 2023-03-09 20:48:49
+ * @LastEditTime: 2023-03-09 20:59:13
  * @Description: file content
  * @FilePath: \studyNode\Typescript\00_数据类型.ts
  */
@@ -267,7 +267,6 @@ function fun4() {
   console.log(findNum([4, 5, 6]));
 
 }
-
 // fun4()
 
 // 类型断言、联合类型、交叉类型
@@ -296,17 +295,28 @@ function fun5() {
     sex: 1
   })
 
-  // 类型断言 并不会改变参数类型
+  // 类型断言 并不会改变参数类型,只能够"欺骗"Typescript编辑器,无法避免错误
   let fn1 = (num: number | string): void => {
     // console.log(num.length); // 类型“number”上不存在属性“length”。
     // 第一种类型断言写法
     console.log((num as string).length);
     // 第二种类型断言写法
     console.log((<string>num).length);
-
   }
-  fn1("1223") // 结果 4
-  fn1(1223) // 结果 undefined
+  fn1("1223"); // 结果 4
+  fn1(1223); // 结果 undefined
+  // any临时断言
+  // window.abc = 123 // 类型“Window & typeof globalThis”上不存在属性“abc”
+  (window as any).abc = 123; // 使用any临时断言的变量,访问任何属性都是允许的
+  // as const
+  const names = "QL";
+  // names = "XM"; // 无法分配到 "names" ，因为它是常数。
+  let names2 = "QL" as const;
+  // names2 = "XM"; //不能将类型“"XM"”分配给类型“"QL"”
+  let a1 = [12, 20] as const;
+  const a2 = [12, 20];
+  // a1.push(11); // 类型“readonly [12, 20]”上不存在属性“push”。 数据无法修改
+  a2.push(11);
 }
+// fun5()
 
-fun5()

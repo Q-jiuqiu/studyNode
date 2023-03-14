@@ -171,3 +171,31 @@ function fun3() {
   type num5 = 1 extends never ? 1 : 0 // 返回0
   // 为什么num1到num4都为1,而num5为0. 这与类型的包含关系有关
 }
+
+// never类型
+function fun4() {
+  // 通常表示不存在的状态
+  type A = string & number // 将A推断为never类型 因为一个值的类型不可能既属于string又属于number,所以被推断为了never
+  function xm(): never {
+    throw new Error("小米")
+  }
+
+  type B = void | number | never // 将B判断为type B = number | void 因为never数据数据级别的最底层,会被直接忽略掉的
+
+  type C = "唱" | "跳" | "rap"
+
+  function kun(value: C) {
+    switch (value) {
+      case "唱":
+        break;
+      case "跳":
+        break;
+      case "rap":
+        break
+      default:
+        // 兜底逻辑
+        const error: never = value
+        break
+    }
+  }
+}

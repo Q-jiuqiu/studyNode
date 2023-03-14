@@ -125,8 +125,49 @@ function fun2() {
   let success: number = Types2.success
   let key = Types2[success]
   console.log("key:", key, "-value:", success); // 0
-
-
 }
 
+// 类型推论、类型别名
+function fun3() {
+  // 类型推论: 在定义变量时没有明确指出变量类型,ts会通过复制推断出一个类型
+  let num = 1 // let num: number
+  // num = "sti" // 报错 不能将类型“string”分配给类型“number”。
 
+  // 当定义了值但是没有赋值时,默认推断为any
+  let str
+  str = null
+  str = 12
+
+  // 类型别名
+  type s = string | number
+  let name: string = "QL"
+  let name1: s = "QL"
+  type obj = {}
+  type arr = number[]
+  type s1 = number & B
+  // 与interface类似
+
+  // type 
+  // 1.不能继承,只能使用交叉类型&来达到类似的效果
+  // 2.可以写联合类型 |
+  // 3.不能重名
+  // interface 
+  // 1.可以继承
+  // 2.不能写联合类型
+  // 3.可以重名,重名去并集
+  interface A extends B {
+
+  }
+  interface B {
+
+  }
+
+  // type 的高级用法
+  type num = 1 extends number ? 1 : 0 // 返回1 extends是包含的意思->左边的值会作为右边类型的子类型 1是包含在number里的为true
+  type num1 = 1 extends any ? 1 : 0 // 返回1 
+  type num2 = 1 extends unknown ? 1 : 0 // 返回1 
+  type num3 = 1 extends Object ? 1 : 0 // 返回1 
+  type num4 = 1 extends Number ? 1 : 0 // 返回1 
+  type num5 = 1 extends never ? 1 : 0 // 返回0
+  // 为什么num1到num4都为1,而num5为0. 这与类型的包含关系有关
+}

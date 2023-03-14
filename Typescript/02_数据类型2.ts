@@ -27,4 +27,106 @@ function fun1() {
   ]
 }
 
+// 枚举类型
+function fun2() {
+  // 关键字 enum
+  // 1.数字枚举
+  enum Color {
+    red, // 默认从0开始
+    green,
+    blue
+  }
+  console.log(Color.red); // 0
+  console.log(Color.green); // 1
+  console.log(Color.blue); // 2
+  console.log("====");
+
+  // 2.增加枚举
+  enum Color1 {
+    red = 1, // 从1开始
+    green,
+    blue
+  }
+  console.log(Color1.red); // 1
+  console.log(Color1.green); // 2
+  console.log(Color1.blue); // 3
+  console.log("====");
+
+  // 3.自定义枚举
+  enum Color2 {
+    red = 1, // 从1开始
+    green = 4,
+    blue = 5
+  }
+  console.log(Color2.red); // 1
+  console.log(Color2.green); // 4
+  console.log(Color2.blue); // 5
+  console.log("====");
+
+  // 4.字符串枚举 每个枚举值都要赋值 因为字符串枚举没有自增长的行为
+  enum Color3 {
+    red = "red",
+    green = "green",
+    blue = "blue"
+  }
+  console.log(Color3.red); // red
+  console.log(Color3.green); // green
+  console.log(Color3.blue); // blue
+  console.log("====");
+
+  // 5.异构枚举
+  enum Color4 {
+    yes = 1,
+    no = "no"
+  }
+  console.log(Color4.yes); // 1
+  console.log(Color4.no); // no
+  console.log("====");
+
+  // 6.接口枚举
+  interface A {
+    red: Color.red
+  }
+  let obj: A = {
+    // red: 1
+    red: Color.red
+  }
+
+  // 7.const枚举
+  // var enum Types {
+  //   success,
+  //   fail
+  // } // 报错 “enum”不得用作变量声明名称
+  // let enum Types {
+  //   success,
+  //   fail
+  // } // 报错 此位置不允许使用变量声明
+  // 使用const 定义后在编译成js时Types不会被编译成一个对象
+  const enum Types {
+    success,
+    fail
+  }
+  let code: number = 0
+  if (code === Types.success) { }
+
+  enum Types1 {
+    success,
+    fail
+  }
+  let code1: number = 0
+  if (code1 === Types1.success) { }
+
+  // 8.反向映射 可以通过key来读取value 也可以通过value来读取key 前提是不能使用const来修饰 字符串枚举是没办法进行反射的
+  enum Types2 {
+    success,
+    fail
+  }
+
+  let success: number = Types2.success
+  let key = Types2[success]
+  console.log("key:", key, "-value:", success); // 0
+
+
+}
+
 

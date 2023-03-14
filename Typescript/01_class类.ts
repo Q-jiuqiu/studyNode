@@ -129,3 +129,38 @@ const ref = new Ref("哈哈哈")
 console.log(ref.value); // 哈哈哈vv
 ref.value = "你好"
 console.log(ref.value); // 你好QLvv
+
+
+// 抽象类--基类 abstract 抽象类无法通过new来实例化
+abstract class Vue_ {
+  name: string
+  constructor(name: string) {
+    this.name = name
+  }
+  // 方法的实现
+  getName(): string {
+    return this.name
+  }
+  // abstract 定义的方法 只能描描述,不能进行实现
+  // abstract init() { } // 报错 方法“init”不能具有实现，因为它标记为抽象。
+  abstract init(name: string): void
+}
+// new Vue_() // 报错 无法创建抽象类的实例。
+
+// 派生类(也就是子类)需要实现抽象类里的抽象方法 派生类是可以实例化的
+class React extends Vue_ { // 非抽象类“React”不会实现继承自“Vue_”类的抽象成员“init”。
+  constructor() {
+    super("xxx")
+  }
+  // 实现了父类的抽象方法
+  init(name: string): void {
+
+  }
+  setName(name: string) {
+    this.name = name
+  }
+}
+const react = new React()
+react.setName("nn")
+
+console.log(react.getName());

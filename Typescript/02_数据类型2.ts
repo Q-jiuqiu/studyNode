@@ -199,3 +199,127 @@ function fun4() {
     }
   }
 }
+
+// Symbol
+function fun5() {
+  // 1.Symbol定义唯一值
+  let a1: symbol = Symbol(1)
+  let a2: symbol = Symbol(1)
+  console.log(a1 === a2); // false
+  console.log(a1 == a2); // false
+  // for Symbol for会全局symbol有没有注册过这个key 如果有这个key就直接拿来使用了 如果没有则去创建一个Symbol
+  console.log(Symbol.for("XiaoMan") === Symbol.for("XiaoMan")); // true
+
+  // 使用场景
+  // 2.避免对象内key值重复
+  let obj = {
+    name: 1,
+    // name: 2 // 对象文本不能具有多个名称相同的属性
+    [a1]: 11,
+    [a2]: 22
+  }
+  console.log(obj); // { name: 1, [Symbol(1)]: 11, [Symbol(1)]: 22 }
+
+  // for in 不能读到symbol
+  for (let key in obj) {
+    console.log(key); // 输出->name 
+  }
+  // Object.keys 不能读到symbol
+  console.log(Object.keys(obj)); // 输出->['name']
+  console.log(Object.getOwnPropertyNames(obj)); // 输出->['name']
+
+  // Object.getOwnPropertySymbols 只能读到symbol
+  console.log(Object.getOwnPropertySymbols(obj)); // 输出->[ Symbol(1), Symbol(1) ]
+
+  // 3.Reflect.ownKeys()
+  console.log(Reflect.ownKeys(obj)); // 输出->[ 'name', Symbol(1), Symbol(1) ]
+
+  // 4.生成器
+  function* gen() {
+    yield Promise.resolve("小满") // yield后跟同步或异步
+    yield "大满" // yield后跟同步或异步
+    yield "超大满" // yield后跟同步或异步
+    yield "无敌大满" // yield后跟同步或异步
+  }
+
+  const man = gen()
+  console.log(man.next()); // { value: Promise { '小满' }, done: false }
+  console.log(man.next()); // { value: 大满, done: false }
+  console.log(man.next()); // { value: 超大满, done: false }
+  console.log(man.next()); // { value: 无敌大满, done: false }
+  console.log(man.next()); // { value: undefined, done: true } done为true表示没有东西可以迭代了
+
+  // 5.迭代器 symbol.
+  // map、set、weakMap、weakSet
+  let set: Set<number> = new Set([1, 2, 2, 3, 3]) // 天然去重的 1,2,3 只支持数字和字符串,对象不支持去重
+  let map: Map<any, any> = new Map()
+  let Arr = [1, 2, 3]
+  map.set(Arr, "小满")
+  console.log(map.get(Arr)); // 输出->小满
+  function args() {
+    console.log(arguments); // 伪数组
+  }
+  // let list = document.querySelectorAll("div") // 伪数组或者类数组 也是具有迭代器的
+
+  const each = (value: any) => {
+    let It: any = value[Symbol.iterator]() // 与生成器一样具有next方法,并且通过next方法进行"遍历",返回一个对象->{value:xxx,done:false/true}
+    let next: any = { done: false }
+    while (!next.done) {
+      next = It.next()
+      console.log(next.value);
+    }
+  }
+  each(map) // [ [ 1, 2, 3 ], '小满' ] undefined // key为[ 1, 2, 3 ],value为'小满'
+  each(set) // 1 2 3 undefined
+  // 6.迭代器的语法糖 ->for of ->底层实现逻辑为each函数
+  // 特别注意for of 对象不可用 因为对象上没有迭代器Symbol.iterator方法
+  for (const iterator of set) {
+    console.log(iterator);
+  }
+  // 7.解构
+  let [a, b, c] = [4, 5, 6]
+  console.log(a, b, c); // 输出-> 4,5,6
+  console.log(...[4, 5, 6]);
+  // 数组解构的底层原理为: 调用Symbol.iterator
+  // 8.对象支持for of
+  let obj1 = {
+    max: 5,
+    current: 0,
+    [Symbol.iterator]() {
+      return {
+        max: this.max,
+        current: this.current,
+        next() {
+          if (this.current == this.max) {
+            return {
+              value: undefined,
+              done: true
+            }
+          } else {
+            return {
+              value: this.current++,
+              done: false
+            }
+          }
+        }
+      }
+    }
+  }
+  for (let value of obj1) {
+    console.log(value); //输出 0,1,2,3,4
+  }
+  // 数组解构
+  let x = [...obj1]
+  console.log(x); // 输出结果为: [0,1,2,3,4]
+  // 对象解构
+  let y = { ...obj1 }
+  console.log(y);
+  // 输出结果为:
+  // {
+  //   max: 5,
+  //   current: 0,
+  //   [Symbol(Symbol.iterator)]: [Function: [Symbol.iterator]]
+  // }
+}
+
+fun5()

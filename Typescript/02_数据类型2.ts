@@ -322,4 +322,119 @@ function fun5() {
   // }
 }
 
-fun5()
+// 泛型-动态类型 <名字> 相当于占位符
+function fun6() {
+  function Fun1(a: number, b: number): Array<number> {
+    return [a, b]
+  }
+  function Fun2(a: string, b: string): Array<string> {
+    return [a, b]
+  }
+  // Fun1与Fun2代码逻辑相同,传参和返回都类似,重复书写  -->泛型就是为了解决这一问题
+  function Fun<T>(a: T, b: T): Array<T> {
+    return [a, b]
+  }
+  Fun(1, 2) // 此时T的动态类型为number
+  // Fun(1, "1") // 类型“string”的参数不能赋给类型“number”的参数。 T不能即使number又是string
+  Fun("1", "1") // 此时T的动态类型为string
+
+
+  // 泛型的用法
+  // 1.type和interface使用泛型
+  type A<T> = string | number | T
+  let a: A<boolean> = true // 相当于 type A<T> = string | number | boolean
+  let a1: A<undefined> = undefined
+  let a2: A<null> = null
+
+  interface Data<T> {
+    msg: T
+    name: string
+  }
+  let data: Data<string> = {
+    msg: "1111",
+    name: "222"
+  }
+
+  // 泛型的高级用法
+  function add<T, K>(a: T, b: K): Array<T | K> {
+    return [a, b]
+  }
+  add(1, false) // T为number K为boolean
+  // 泛型也可有默认值
+  function add1<T = number, K = boolean>(a: T, b: K): Array<T | K> {
+    return [a, b]
+  }
+  add1(1, "false") // T为number K为string
+
+  const axios = {
+    get<T>(url: string): Promise<T> {
+      return new Promise((resolve, reject) => {
+        let xhr: XMLHttpRequest = new XMLHttpRequest()
+        xhr.open("GET", url)
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            resolve(JSON.parse(xhr.responseText))
+          }
+        }
+        xhr.send(null)
+      })
+    }
+  }
+
+  interface resultData {
+    message: string
+    code: string
+  }
+
+  axios.get<resultData>("./data.json").then(res => {
+    console.log(res.code);
+    console.log(res.message);
+  })
+
+  // 泛型的约束 用法在类型后面跟 extends 再跟一个约束的类型 来缩小类型
+  function add2<T extends number>(a: T, b: T) { // T被约束为number类型
+    return a + b // 运算符“+”不能应用于类型“T”和“T”。
+  }
+  add2(1, 2)
+
+  interface Len {
+    length: number
+  }
+  function fn<T extends Len>(a: T) {
+    a.length
+  }
+  fn("11")
+  fn([1, 2, 3])
+  // fn(1223) // 类型“number”的参数不能赋给类型“Len”的参数
+  // fn(false)
+
+  let obj = {
+    name: "小米",
+    sex: "女"
+  }
+
+  // keyof 将对象的key推断成联合类型 keyof 后跟类型 泛型必须为对象
+  type Key = keyof typeof obj
+
+  // 需求: key只接收关键值
+  function ob<T extends object, K extends keyof T>(obj: T, key: K) {
+    return obj[key]
+  }
+
+  ob(obj, "name")
+  // ob(obj, "age") // 类型“"age"”的参数不能赋给类型“"name" | "sex"”的参数
+
+  // keyof高级用法
+  interface People {
+    name: string
+    age: number
+    sex: string
+  }
+  // 需求:将People的key变成可选值
+  // for in  for(let key in obj)
+  type Options<T extends object> = {
+    [Key in keyof T]?: T[Key]
+  }
+
+  type B = Options<People>
+}

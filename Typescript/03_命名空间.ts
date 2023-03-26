@@ -33,4 +33,15 @@ namespace A {
 }
 console.log(A.d);
 
+// 命名空间类似一个函数
+namespace C {
+  export const Time: number = 1000
+  export const fn = <T>(arg: T): T => {
+    console.log(11);
+    return arg
+  }
+  fn(Time)
+}
+
+console.log(C.Time);
 

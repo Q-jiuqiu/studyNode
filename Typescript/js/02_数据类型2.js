@@ -292,4 +292,25 @@ function fun6() {
         console.log(res.code);
         console.log(res.message);
     });
+    // 泛型的约束 用法在类型后面跟 extends 再跟一个约束的类型 来缩小类型
+    function add2(a, b) {
+        return a + b; // 运算符“+”不能应用于类型“T”和“T”。
+    }
+    add2(1, 2);
+    function fn(a) {
+        a.length;
+    }
+    fn("11");
+    fn([1, 2, 3]);
+    // fn(1223) // 类型“number”的参数不能赋给类型“Len”的参数
+    // fn(false)
+    let obj = {
+        name: "小米",
+        sex: "女"
+    };
+    // 需求: key只接收关键值
+    function ob(obj, key) {
+        return obj[key];
+    }
+    ob(obj, "name");
 }

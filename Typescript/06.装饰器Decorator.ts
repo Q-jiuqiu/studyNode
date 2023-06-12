@@ -41,7 +41,7 @@ function fun2() {
   }
 
   const http = new Http() as any
-  console.log(http.name); // 输出->小满
+  console.log(http.name); // 输出->小明
 
 }
 // fun2()
@@ -63,6 +63,7 @@ function fun3() {
       // descriptor -- 描述 -- value为方法
       console.log(target, "=", key, "=", descriptor);
 
+      // 获取在目标对象或其原型链上提供的元数据键的元数据值
       const key_ = Reflect.getMetadata("key", target)
 
       axios.get(url).then(res => {
@@ -103,7 +104,7 @@ function fun3() {
     @Get("https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10")
     getList(@Result() data: any) {
       // Result是优先于Get去执行的
-      // console.log(data);
+      console.log(data);
 
     }
     create() {

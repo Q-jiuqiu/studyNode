@@ -1,0 +1,9 @@
+{
+  "name": "TS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.3.1"
+  }
+}

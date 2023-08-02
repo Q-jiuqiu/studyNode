@@ -1,0 +1,35 @@
+<!--
+ * @Author: quling
+ * @Date: 2023-06-20 10:34:26
+ * @LastEditors: quling
+ * @LastEditTime: 2023-06-20 10:54:01
+ * @Description: 
+ * @FilePath: \studyNode\JavaScript\12ES6入门教程\08.函数扩展\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./index.js"></script>
+</head>
+
+<body>
+  <button id="press">press</button>
+</body>
+<script>
+  var button = document.getElementById('press');
+  button.addEventListener('click', () => {
+    console.log(this); // this指向全局变量
+    // this.classList.toggle('on');
+  });
+
+  button.addEventListener('click', function () {
+    console.log(this); // this指向button
+    // this.classList.toggle('on');
+  });
+</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!--
+ * @Author: quling
+ * @Date: 2024-06-12 14:34:14
+ * @LastEditors: quling
+ * @LastEditTime: 2024-06-12 14:34:20
+ * @Description: 
+ * @FilePath: \studyNode\html\openlayer\多个map共用viewer.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OpenLayers - Multiple Maps Sharing One View</title>
+  <link rel="stylesheet" href="https://openlayers.org/en/v6.9.0/css/ol.css">
+  <style>
+    .map {
+      width: 45%;
+      height: 400px;
+      display: inline-block;
+    }
+  </style>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.9.0/build/ol.js"></script>
+</head>
+
+<body>
+  <div id="map1" class="map"></div>
+  <div id="map2" class="map"></div>
+  <script>
+    // 创建一个视图
+    const sharedView = new ol.View({
+      center: ol.proj.fromLonLat([0, 0]),
+      zoom: 2
+    });
+
+    // 创建第一个地图
+    const map1 = new ol.Map({
+      target: 'map1',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: sharedView
+    });
+
+    // 创建第二个地图
+    const map2 = new ol.Map({
+      target: 'map2',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: sharedView
+    });
+  </script>
+</body>
+
+</html>

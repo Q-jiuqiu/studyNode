@@ -1,0 +1,57 @@
+<!--
+ * @Author: quling
+ * @Date: 2021-09-10 13:12:13
+ * @LastEditors: quling
+ * @LastEditTime: 2024-07-02 15:16:34
+ * @Description: 
+ * @FilePath: \studyNode\html\预览本地选中的视屏.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Upload and Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    #videoPreview {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="file" id="videoInput" accept="video/*">
+  <video id="videoPreview" controls autoplay style="display: none;">
+    <source id="videoSource" src="" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    document.getElementById('videoInput').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const video = document.getElementById('videoPreview');
+        const source = document.getElementById('videoSource');
+        source.src = URL.createObjectURL(file);
+        video.style.display = 'block';
+        console.log("video", video);
+        video.load();
+      }
+    });
+  </script>
+</body>
+
+</html>
